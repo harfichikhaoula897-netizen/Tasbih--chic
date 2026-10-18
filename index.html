@@ -1,1 +1,158 @@
+!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasbih Chic - تسبيح</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            --card-bg: #ffffff;
+            --primary-color: #d81b60;
+            --accent-gold: #c5a059;
+            --gold-light: #f3e5ab;
+            --text-color: #4a4a4a;
+        }
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--accent-gold);
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: var(--accent-gold);
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .counter-display {
+            font-size: 60px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+            background: var(--gold-light);
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            border: 4px dashed var(--accent-gold);
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.05);
+        }
+        .dhikr-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--accent-gold);
+            font-size: 16px;
+            margin-bottom: 20px;
+            outline: none;
+            background: #fff;
+            color: var(--text-color);
+            text-align: center;
+        }
+        .btn-main {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.3);
+            font-weight: bold;
+            transition: 0.2s;
+            margin-bottom: 10px;
+        }
+        .btn-main:active {
+            transform: scale(0.97);
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-sub {
+            flex: 1;
+            padding: 10px;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        <h1>Tasbih Chic</h1>
+        <div class="subtitle">✨ تطبيق التسبيح الراقي ✨</div>
+
+        <select id="dhikrSelect" class="dhikr-select" onchange="updateDhikr()">
+            <option value="سُبْحَانَ اللَّهِ">سُبْحَانَ اللَّهِ</option>
+            <option value="الْحَمْدُ لِلَّهِ">الْحَمْدُ لِلَّهِ</option>
+            <option value="لَا إِلَهَ إِلَّا اللَّهُ">لَا إِلَهَ إِلَّا اللَّهُ</option>
+            <option value="اللَّهُ أَكْبَرُ">اللَّهُ أَكْبَرُ</option>
+            <option value="سُبْحَانَ اللَّهِ وَبِحَمْدِهِ">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</option>
+        </select>
+
+        <div id="counter" class="counter-display">0</div>
+
+        <button class="btn-main" onclick="increment()">سبّح</button>
+
+        <div class="actions">
+            <button class="btn-sub" onclick="resetCounter()">إعادة الصفر</button>
+        </div>
+    </div>
+
+    <script>
+        let count = localStorage.getItem('tasbih_count') || 0;
+        const counterDisplay = document.getElementById('counter');
+        counterDisplay.innerText = count;
+
+        function increment() {
+            count++;
+            counterDisplay.innerText = count;
+            localStorage.setItem('tasbih_count', count);
+        }
+
+        function resetCounter() {
+            if(confirm('هل تريد إعادة العداد إلى الصفر؟')) {
+                count = 0;
+                counterDisplay.innerText = count;
+                localStorage.setItem('tasbih_count', count);
+            }
+        }
+
+        function updateDhikr() {
+            // يمكن إضافة ميزات إضافية هنا مستقبلاً
+        }
+    </script>
+</body>
